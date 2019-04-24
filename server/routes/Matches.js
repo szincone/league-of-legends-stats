@@ -19,7 +19,13 @@ router.get('/:summoner_name', async (req, res) => {
         process.env.API_KEY
       }`,
     );
-    res.status(responseStatus.success).json(summonerInfo.data);
+    const matches = await axios.get(
+      `${baseURL}match/v4/matchlists/by-account/${
+        summonerInfo.data.accountId
+      }?api_key=${process.env.API_KEY}`,
+    );
+    // console.log('MAMAMAMAM', matches.data.matches);
+    res.status(responseStatus.success).json(matches.data.matches);
   } catch (err) {
     res.status(responseStatus.internalErr).json(err);
   }
