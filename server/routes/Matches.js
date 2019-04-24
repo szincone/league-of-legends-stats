@@ -11,7 +11,9 @@ const responseStatus = {
 
 router.get('/', async (req, res) => {
   try {
-    res.status(responseStatus.success).json({ message: 'Up and running...' });
+    res
+      .status(responseStatus.success)
+      .json({ id: 0, message: 'Up and running...' });
   } catch (err) {
     res.status(responseStatus.internalErr).json(err);
   }
