@@ -23,12 +23,13 @@ function App() {
     }
   };
 
-  const fetchMatches = async () => {
+  const fetchMatches = async (event) => {
     try {
-      const response = await axios.get('http://localhost:9000/matches/');
+      event.preventDefault();
+      const response = await axios.get(
+        `http://localhost:9000/matches/${summonerName}`,
+      );
       console.log('RESPONsE', response);
-      setMatches(response);
-      setSummonerName('');
     } catch (err) {
       console.log('ERROR IS', err);
     }
