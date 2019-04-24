@@ -14,6 +14,7 @@ function App() {
 
   const updateMatches = async () => {
     try {
+      // this is for starting data from the server, just so I could see what I was working w/
       const response = await axios.get('http://localhost:9000/matches/');
       // console.log('RESPONsE', response);
       setMatches([response.data]);
@@ -25,11 +26,15 @@ function App() {
 
   const fetchMatches = async (event) => {
     try {
-      event.preventDefault();
-      const response = await axios.get(
-        `http://localhost:9000/matches/${summonerName}`,
-      );
-      console.log('RESPONsE', response);
+      if (event) {
+        event.preventDefault();
+        const response = await axios.get(
+          `http://localhost:9000/matches/${summonerName}`,
+        );
+        console.log('RESPONSE', response.data);
+        setMatches([response.data]);
+        setSummonerName('');
+      }
     } catch (err) {
       console.log('ERROR IS', err);
     }

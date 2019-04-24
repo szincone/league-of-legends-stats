@@ -6,14 +6,18 @@ function Matches(props) {
       style={{
         background: 'green',
         width: '80%',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
       }}
     >
       {props.matches.map((match) => (
-        <>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          key={match.id}
+        >
           <div
             style={{
               display: 'flex',
@@ -91,7 +95,7 @@ function Matches(props) {
             </div>
           </div>
           <button>&#x2193;</button>
-        </>
+        </div>
       ))}
     </div>
   );
