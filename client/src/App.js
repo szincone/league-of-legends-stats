@@ -16,7 +16,7 @@ function App() {
     try {
       // this is for starting data from the server, just so I could see what I was working w/
       const response = await axios.get(
-        'https://league-stats.netlify.com/matches/',
+        'https://league-backend-battlefy.herokuapp.com/matches/',
       );
       // console.log('RESPONsE', response);
       setMatches([response.data]);
@@ -31,7 +31,7 @@ function App() {
       if (event) {
         event.preventDefault();
         const response = await axios.get(
-          `https://league-stats.netlify.com/matches/${summonerName}`,
+          `https://league-backend-battlefy.herokuapp.com/matches/${summonerName}`,
         );
         console.log('RESPONSE', response.data);
         setMatches([response.data]);
