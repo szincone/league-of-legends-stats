@@ -40,12 +40,17 @@ function App() {
   };
 
   return (
-    <div>
-      <Route
-        exact
-        path="/"
-        render={(props) => <Matches {...props} matches={matches} />}
-      />
+    <div
+      style={{
+        margin: '1rem auto',
+        maxWidth: '800px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: ' center',
+        alignItems: 'center',
+      }}
+    >
+      <h2>{'League Stats'}</h2>
       <Route
         exact
         path="/"
@@ -57,6 +62,11 @@ function App() {
             fetchMatches={fetchMatches}
           />
         )}
+      />
+      <Route
+        exact
+        path="/"
+        render={(props) => <Matches {...props} matches={matches} />}
       />
     </div>
   );
