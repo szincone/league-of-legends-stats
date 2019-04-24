@@ -15,7 +15,9 @@ function App() {
   const updateMatches = async () => {
     try {
       // this is for starting data from the server, just so I could see what I was working w/
-      const response = await axios.get('http://localhost:9000/matches/');
+      const response = await axios.get(
+        'https://league-stats.netlify.com/matches/',
+      );
       // console.log('RESPONsE', response);
       setMatches([response.data]);
       setSummonerName('');
@@ -29,7 +31,7 @@ function App() {
       if (event) {
         event.preventDefault();
         const response = await axios.get(
-          `http://localhost:9000/matches/${summonerName}`,
+          `https://league-stats.netlify.com/matches/${summonerName}`,
         );
         console.log('RESPONSE', response.data);
         setMatches([response.data]);
