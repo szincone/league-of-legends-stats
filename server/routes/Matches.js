@@ -24,19 +24,39 @@ router.get('/:summoner_name', async (req, res) => {
         summonerInfo.data.accountId
       }?api_key=${process.env.API_KEY}`,
     );
-    // console.log('MAMAMAMAM', matches.data.matches);
-    res.status(responseStatus.success).json(matches.data.matches);
+    const getMatchData = async (arr) => {
+      const matchObj = [];
+      try {
+        // for (let i = 0; i < arr.length - 1; i++) { // uncomment for all matches
+        for (let i = 0; i < 5; i++) {
+          const matchInfo = await axios.get(
+            `${baseURL}match/v4/matches/${arr[i].gameId}?api_key=${
+              process.env.API_KEY
+            }`,
+          );
+          matchObj.push(matchInfo.data);
+        }
+        return matchObj;
+      } catch (err) {
+        console.log('ERROR', err);
+        res.status(responseStatus.internalErr).json({ message: err });
+      }
+    };
+    const arrOfMatches = await getMatchData(matches.data.matches);
+    res.status(responseStatus.success).json(arrOfMatches);
   } catch (err) {
-    res.status(responseStatus.internalErr).json(err);
+    console.log('ERROR', err);
+    res.status(responseStatus.internalErr).json({ message: err });
   }
 });
+
 router.get('/', async (req, res) => {
   try {
     res
       .status(responseStatus.success)
       .json({ id: 0, message: 'Up and running...' });
   } catch (err) {
-    res.status(responseStatus.internalErr).json(err);
+    res.status(responseStatus.internalErr).json({ message: err });
   }
 });
 
